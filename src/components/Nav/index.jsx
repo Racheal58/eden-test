@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 import './index.scss';
 
@@ -10,6 +10,13 @@ const Nav = ({
   searchValue,
   handleSearch,
   respFunc,
+  dateValue,
+  handleDateChange,
+  votesFilterArray,
+  handleUpvoteFilter,
+  displayDropdown,
+  toggleDropdown,
+  resetPosts,
 }) => {
   return (
     <>
@@ -17,6 +24,61 @@ const Nav = ({
         <Link className="navbar-brand" to="/">
           Reddit
         </Link>
+
+        <div className="dropdown">
+          <Button
+            basic
+            className="dropdown-btns"
+            onClick={() => toggleDropdown()}
+            inverted
+          >
+            Filter By:
+            <Icon name="filter" style={{ marginLeft: '5px' }} />
+          </Button>
+
+          <Button
+            basic
+            className="dropdown-btns"
+            onClick={() => resetPosts()}
+            inverted
+          >
+            Reset All
+            <Icon name="undo" style={{ marginLeft: '5px' }} />
+          </Button>
+          {displayDropdown && (
+            <div id="myDropdown" className="dropdown-content">
+              <div className="dropdown-list-item">
+                <p className="title">Date</p>
+                <input
+                  type="date"
+                  name="date"
+                  id=""
+                  value={dateValue}
+                  onChange={e => handleDateChange(e)}
+                />
+              </div>
+
+              <div className="dropdown-list-item">
+                <label className="title" htmlFor="upvote-count-range">
+                  Upvote count range
+                </label>
+                <select
+                  name="cars"
+                  id="upvote-count-range"
+                  className="upvote-count-range"
+                  onChange={e => handleUpvoteFilter(e)}
+                >
+                  {votesFilterArray.map(item => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          )}
+        </div>
+
         <section className="nav_actions">
           <div className="search-container">
             <input
@@ -51,6 +113,60 @@ const Nav = ({
         ></Button>
       </nav>
       <section className="nav_actions_resp">
+        <div className="dropdown resp">
+          <Button
+            basic
+            className="dropdown-btns"
+            onClick={() => toggleDropdown()}
+            inverted
+          >
+            Filter By:
+            <Icon name="filter" style={{ marginLeft: '5px' }} />
+          </Button>
+
+          <Button
+            basic
+            className="dropdown-btns"
+            onClick={() => resetPosts()}
+            inverted
+          >
+            Reset All
+            <Icon name="undo" style={{ marginLeft: '5px' }} />
+          </Button>
+          {displayDropdown && (
+            <div id="myDropdown" className="dropdown-content">
+              <div className="dropdown-list-item">
+                <p className="title">Date</p>
+                <input
+                  type="date"
+                  name="date"
+                  id=""
+                  value={dateValue}
+                  onChange={e => handleDateChange(e)}
+                />
+              </div>
+
+              <div className="dropdown-list-item">
+                <label className="title" htmlFor="upvote-count-range">
+                  Upvote count range
+                </label>
+                <select
+                  name="cars"
+                  id="upvote-count-range"
+                  className="upvote-count-range"
+                  onChange={e => handleUpvoteFilter(e)}
+                >
+                  {votesFilterArray.map(item => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          )}
+        </div>
+
         <div className="search-container">
           <input
             placeholder="Search by title"

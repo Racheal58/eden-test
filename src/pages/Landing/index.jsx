@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Icon } from 'semantic-ui-react';
 
 // styles
 import './index.scss';
@@ -109,6 +108,14 @@ class Landing extends React.Component {
     }));
   };
 
+  toggleDropdown = () => {
+    const { displayDropdown } = this.state;
+    this.setState(previousState => ({
+      ...previousState,
+      displayDropdown: !displayDropdown,
+    }));
+  };
+
   render() {
     const { posts, subreddits } = this.props;
     const {
@@ -117,6 +124,7 @@ class Landing extends React.Component {
       showFilter,
       dateValue,
       respSidebarDisplay,
+      displayDropdown,
     } = this.state;
 
     return (
@@ -127,57 +135,14 @@ class Landing extends React.Component {
           searchValue={searchValue}
           handleSearch={this.handleSearch}
           respFunc={this.respFunc}
+          handleDateChange={this.handleDateChange}
+          dateValue={dateValue}
+          votesFilterArray={this.votesFilterArray}
+          handleUpvoteFilter={this.handleUpvoteFilter}
+          displayDropdown={displayDropdown}
+          toggleDropdown={this.toggleDropdown}
+          resetPosts={this.resetPosts}
         />
-
-        <section className="filter-section">
-          <div className="cta-section">
-            <Button basic onClick={() => this.toggleFilter()} inverted>
-              Filter By:
-              <Icon name="filter" id="filter-icon" />
-            </Button>
-
-            <Button basic onClick={() => this.resetPosts()} inverted>
-              Reset All
-              <Icon name="undo" id="undo-icon" />
-            </Button>
-          </div>
-
-          {showFilter && (
-            <div className="main">
-              <div className="date-section">
-                <input
-                  type="date"
-                  name="date"
-                  id=""
-                  value={dateValue}
-                  onChange={e => this.handleDateChange(e)}
-                />
-              </div>
-
-              <div className="votes-section">
-                <div className="form-group">
-                  {this.votesFilterArray.map(item => (
-                    <div
-                      key={item}
-                      className="custom-control custom-radio custom-control-inline"
-                    >
-                      <input
-                        type="radio"
-                        id={item}
-                        value={item}
-                        name="upvote"
-                        onChange={e => this.handleUpvoteFilter(e)}
-                      />
-                      <label className="custom-label d-flex" htmlFor={item}>
-                        <p>{item}</p>
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-        </section>
         <section className="layout">
           <div className="left">
             <div className="postscard_container">
@@ -196,9 +161,6 @@ class Landing extends React.Component {
                   subreddits.map((subreddit, index) => (
                     <button
                       key={index}
-                      style={{
-                        color: 'white',
-                      }}
                       type="button"
                       className="subreddit-button"
                       onClick={() => this.filterPosts(subreddit)}
