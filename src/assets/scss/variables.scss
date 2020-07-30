@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,900|Sacramento&display=swap');
+
+
+// @font-face {
+//   font-family: 'Larsseit-normal';
+//   font-style: normal;
+//   font-weight: 400;
+//   src: local('Larsseit'),  url('../fonts/Larsseit/Larsseit.ttf') format('truetype');
+// }
+
+body {
+  font-family: 'Larsseit-normal';
+}
+
+// colors
+$primary-color: #ff4757;
+$primary-white: #fff;
+$primary-black: #000;
+$custom-black: #121420;
+$primary-red: #f00;
+$primary-grey: #c4c4c4;
+$primary-blue: #14acf2;
+$secondary-white: #f2f2f2;
+$secondary-white-2: #bdbdbd;
+$secondary-grey: #828282;
+
+// fonts
+// $larsseit: 'Larsseit-normal';
+$raleway: 'Raleway', sans-serif;
+$sacramento: 'Sacramento', cursive;
