@@ -121,7 +121,9 @@ export const filterByUpvoteCount = (value, posts) => async dispatch => {
 export const filterByDate = (value, posts) => async dispatch => {
   try {
     const filteredPosts = posts.filter(
-      post => moment(post.data.created).format('YYYY-MM-DD') === value,
+      post =>
+        moment.unix(post.data.created, 'YYYY-MM-DD').format('YYYY-MM-DD') ===
+        value,
     );
     dispatch({ type: FILTER_POSTS_SUCCESS, payload: filteredPosts });
   } catch (error) {

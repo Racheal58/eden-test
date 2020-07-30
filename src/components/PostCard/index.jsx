@@ -27,7 +27,7 @@ const PostCard = ({ post: { data } }) => {
                 : `Crossposted by ${data.author}`}
             </p>
             <p className="time">
-              {moment.utc().from(data.created, 'YYYYMMDD')} ago
+              {moment.unix(data.created, 'YYYY-MM-DD').fromNow()}
             </p>
           </div>
           <div className="body">
